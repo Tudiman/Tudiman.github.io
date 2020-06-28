@@ -1,0 +1,384 @@
+#LBWrapper {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#040330;
+    transition:all 1s;
+    transform:scale(0,0);
+}
+
+#SearchMenu {
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    position:absolute;
+    top:90%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:20%;
+    height:15%;
+    background: transparent;
+}
+
+.LBButton {
+    padding:2%;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    background:navajowhite;
+    border:2px solid black;
+    border-radius:8px;
+    transition:all 0.5s;
+}
+
+.LBButton:hover {
+    background:antiquewhite;
+    cursor:pointer;
+}
+
+#LBFilter {
+    padding:0.5%;
+    position:absolute;
+    transform: translate(-50%, -50%);
+    top:10%;
+    left:50%;
+    width:20%;
+}
+
+#LBSearch {
+    width:100%;
+    height:33.33%;
+}
+
+#LBDurationFilter {
+    padding:0.5%;
+    position:absolute;
+    transform: translateY(-50%) scaleX(0);
+    top:10%;
+    left:30%;
+    width:20%;
+}
+
+
+#LBDifficultyFilter {
+    padding:0.5%;
+    position:absolute;
+    transform: translateY(-50%) scaleX(0);
+    top:10%;
+    left:50%;
+    width:20%;
+
+}
+
+.LBIndFilterCont {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    position:absolute;
+    transform:scaleY(0);
+    top:11.5%;
+    width:20%;
+    border:2px solid black;
+    border-radius:8px;
+    background:navajowhite;
+    transition:all 0.5s;
+}
+
+#LBDurFilterCont {
+    left:20%;
+}
+
+.LBIndDurFilterCont {
+    width:33.33%;
+    background:transparent;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+}
+
+.LBIndDurFilterCont input {
+    position:relative;
+    bottom:10%;
+}
+
+.LBIndDurFilterCont label {
+    background:transparent;
+}
+
+#LBDiffFilterCont {
+    transform:scaleY(0);
+    left:60%;
+}
+
+.LBIndDiffFilterCont {
+    width:20%;
+    background:transparent;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+}
+
+.LBIndDiffFilterCont input {
+    position:relative;
+    bottom:10%;
+}
+
+.LBIndDiffFilterCont label {
+    background:transparent;
+}
+
+#LBSelf {
+    width:100%;
+    height:0;
+    padding:0;
+    border-width:0;
+}
+
+#LBInput {
+    width:100%;
+    height:0;
+    padding:0;
+    border-width:0;
+}
+
+#FlexCont {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+    top:25%;
+    left:0;
+    width:100%;
+    height:50%;
+    background:transparent;
+    transition:all 0.5s;
+}
+
+.LevelFlexCont {
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    margin:0 1% 0 1%;
+    width:18%;
+    height:100%;
+    border:5px ridge navajowhite;
+    border-radius:10%;
+    transition:all 0.5s;
+}
+
+#LFCont1 {
+    background:url("../Resources/TranspBack1.jpg") center / cover;
+}
+
+#LFCont2 {
+    background:url("../Resources/TranspBack2.jpg") center / cover;
+}
+
+#LFCont3 {
+    background:url("../Resources/TranspBack3.jpg") center / cover;
+}
+
+#LFCont4 {
+    background:url("../Resources/TranspBack4.jpg") center / cover;
+}
+
+#LFCont5 {
+    background:url("../Resources/TranspBack5.jpg") center / cover;
+}
+
+.TimeFlexDiv {
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    height: 33.33%;
+    width:100%;
+    background:rgba(255,255,255,0);
+    font-size:2.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    border-bottom:5px ridge navajowhite;
+    transition:all 0.5s;
+}
+
+.TimeFlexDiv:hover {
+    background:rgba(255,255,255,0.4);
+    cursor:pointer;
+}
+
+.TFDiv1 {
+     order:1;
+ }
+.TFDiv2 {
+    order:2;
+}
+.TFDiv3 {
+    order:3;
+}
+
+#BlackScreen {
+
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    opacity:0;
+    transition:all 0.2s;
+}
+
+#LBList {
+    overflow-y: scroll;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:15%;
+    border:5px ridge navajowhite;
+    border-bottom-left-radius: 10%;
+    border-top-left-radius: 5px;
+    height:40%;
+}
+
+.LBListItem {
+    width:100%;
+    height:20%;
+    background:#022968;
+    text-align:center;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+    border-bottom:2px solid white;
+}
+
+.LBListItem:last-child {
+    border:none;
+}
+
+.LBListItem:hover {
+    background:#1a63d8;
+}
+
+.LBListItem:nth-child(1) {
+    background:linear-gradient(to bottom right, gold, white, gold);
+}
+
+.LBListItem:nth-child(2) {
+    background:linear-gradient(to bottom right, silver, white, silver);
+}
+
+.LBListItem:nth-child(3) {
+    background:linear-gradient(to bottom right, orange, white, orange);
+}
+
+#LBListBack {
+    position:absolute;
+    top:calc(30% + 5px);
+    left:calc(42.5% + 5px);
+    background:indianred;
+    border:1px solid white;
+    border-radius: 2px;
+}
+
+#LBListBack .material-icons {
+    background:transparent;
+    color:white;
+}
+#LBListBack .material-icons:hover{
+    cursor:pointer;
+}
+
+#LBSearchResults {
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:50%;
+    height:50%;
+    font-size:1.5vw;
+    font-family: "Times New Roman";
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    border:5px ridge navajowhite;
+    border-radius: 5px 10% 10% 10%;
+}
+
+.LBSearchResultsRow {
+    display:flex;
+    width:100%;
+    height:20%;
+    border-bottom:2px solid black;
+}
+
+.LBSearchResultsRow:last-child {
+    border:0;
+}
+
+.LBSearchResultsCol {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:33.33%;
+    height:100%;
+    background:transparent;
+    font-size:2.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    border-right:2px solid white;
+}
+
+.LBSearchResultsCol:last-child {
+    border:0;
+}
+
+#LBClose {
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid white;
+    background:indianred;
+    border-radius:2px;
+}
+
+#LBClose:hover {
+    cursor:pointer;
+}
+
+#LBClose .material-icons {
+    font-size:1vw;
+    color:white;
+    background:transparent;
+}

@@ -1,0 +1,178 @@
+#endPage {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:0;
+    height:0;
+    transition:all 0.5s;
+}
+
+#endTitle {
+    margin:auto;
+    padding:2vw;
+    background:transparent;
+    text-align:center;
+    font-size:5.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+#endScore {
+    margin:auto;
+    padding:5px;
+    background:transparent;
+    text-align:center;
+    font-size:2.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+.endButton {
+    display:none;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:0;
+    height:0;
+    background:darkgreen;
+    border:2px ridge darkseagreen;
+    transition:all 0.5s;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+.endButton:hover, .targetButton:hover{
+    background:seagreen;
+    border:4px ridge white;
+    cursor:pointer;
+}
+
+#resetButton {
+    top:40%;
+}
+
+#targetChange {
+    top:50%;
+}
+
+#targetInput {
+    display:none;
+    position:absolute;
+    top:50%;
+    left:62.5%;
+    width:0%;
+    height:10%;
+    transform: translate(0,-50%);
+    transition:all 0.5s;
+    background:white;
+    font-size:3.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+#lTarget {
+    list-style-type:none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position:absolute;
+    left:75%;
+    top:55%;
+    width:25%;
+    height:0;
+    transform:translate(-50%,0);
+    transition:all 0.5s;
+}
+
+#lTarget li {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:#042459;
+    transition:all 0.5s;
+    font-size:2.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    border:2px solid white;
+    width:100%;
+}
+
+#lTarget li:hover {
+    background:#014bc4;
+    border-width:5px;
+    cursor:pointer;
+}
+
+.targetButton {
+    display:none;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,0);
+    width:25%;
+    height:5%;
+    transition:all 0.5s;
+    background:darkgreen;
+    border:2px ridge darkseagreen;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+#targetConfirm {
+    top:45%;
+}
+
+.wrong {
+    background:red;
+}
+
+.wrong:hover {
+    background:orangered;
+}
+
+#targetCancel {
+    top:50%;
+}
+
+#levelChange {
+    top:60%;
+}
+
+#leaderboard {
+    top:70%;
+}
+
+#startButton {
+    top:80%;
+}

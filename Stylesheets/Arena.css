@@ -1,0 +1,309 @@
+#arenaScreen {
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    background:#3003c4;
+    text-align:center;
+    transition:all 0.5s;
+}
+#arenaTitle {
+    padding:4px;
+    background:transparent;
+    font-size:4.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+#levelScreen {
+    position:relative;
+    left:10vw;
+    width:80vw;
+    height:40vw;
+    background:darkslateblue;
+    border:2px solid black;
+    border-radius:8px;
+}
+
+.indLevelScreen {
+    position:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    background:transparent;
+    transition:left 0.5s;
+}
+
+#level1screen {
+    display:block;
+    left:0%;
+}
+
+#level2screen {
+    left:100%;
+}
+
+#level3screen {
+    left:100%;
+}
+
+#level4screen {
+    left:100%;
+}
+
+#level5screen {
+    left:100%;
+}
+
+.levelName {
+    margin:auto;
+    border-bottom:2px solid black;
+    padding:10px;
+    background:transparent;
+    text-align:center;
+    font-size:2.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+.levelBg {
+    width:75%;
+    height:75%;
+    margin:auto;
+    background-size: cover;
+    background-position: center;
+}
+
+#level1bg {
+    background-image:url("../Resources/Back1.jpg");
+}
+
+#level2bg {
+    background-image:url("../Resources/Back2.jpg");
+}
+
+#level3bg {
+    background-image:url("../Resources/Back3.jpg");
+}
+
+#level4bg {
+    background-image:url("../Resources/Back4.jpg");
+}
+
+#level5bg {
+    background-image:url("../Resources/Back5.jpg");
+}
+
+.levelDesc {
+    background:transparent;
+    border-top:2px solid black;
+    padding:10px;
+    font-size:1.3vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+.leaderInfo {
+    position:absolute;
+    background:transparent;
+    padding:10px;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+.lPlayer {
+    top:50%;
+    left:0;
+    width:10vw;
+    transform: translate(0,-50%);
+}
+
+.lScore {
+    top:50%;
+    left:87.5%;
+    width:10vw;
+    transform:translate(0,-50%);
+}
+
+#arenaSvg {
+    position:absolute;
+    top:27vw;
+    left:0%;
+    transform:translate(0,-50%);
+    width:100%;
+    height:10vw;
+    background: transparent;
+}
+
+#readyButton {
+    opacity:0;
+    position:absolute;
+    top:46.5vw;
+    left:50%;
+    transform:translate(-50%);
+    width:25vw;
+    background:navajowhite;
+    padding:4px;
+    border:5px ridge grey;
+    border-radius:8px;
+    font-size:3.5vw;
+    font-family: Arvo;
+    text-align:center;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+}
+
+#optionsMenu {
+    z-index:2;
+    overflow:visible;
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width:0;
+    height:0;
+    background:transparent;
+    transition:all 0.5s;
+}
+
+.OptionsButton {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height:33.3%;
+    width:25vw;
+    background:navajowhite;
+    border:5px ridge grey;
+    border-radius:8px;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-align:center;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+
+}
+
+#OBTarget .wrong {
+    background:red;
+}
+
+#OBTarget .wrong:hover {
+    background:orangered;
+}
+
+.OptionsButton:hover, #readyButton:hover {
+    background: antiquewhite;
+    border-color:lightgrey;
+    cursor: pointer;
+ }
+
+#optionsMenu #TargetInput {
+    height:25%;
+    width:100%;
+    background:navajowhite;
+    border:5px ridge grey;
+    border-radius:8px;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+}
+
+#TargetCont {
+    display:none;
+    position:absolute;
+    top:0;
+    left:100%;
+    width:0;
+    transition:all 0.2s;
+}
+
+#LBSelect {
+    width:100%;
+    background:navajowhite;
+    border:5px ridge grey;
+    border-radius:8px;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-align:center;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+}
+
+#LBSelect option {
+    background:#042459;
+}
+
+#radioCont {
+    display:none;
+    list-style-type:none;
+    position:absolute;
+    top:33.3%;
+    right:100%;
+    background:transparent;
+    height:auto;
+    width:0;
+    transition: all 0.5s;
+}
+
+#radioCont li {
+    height:3.5vw;
+    background:#042459;
+    border:2px ridge grey;
+    border-radius:6px;
+    font-size:2vw;
+    font-family: Arvo;
+    text-align:center;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+    padding:5px;
+}
+
+#radioCont label {
+    background:transparent;
+}
+
+#OBConfirm {
+    display:none;
+    height:0;
+}

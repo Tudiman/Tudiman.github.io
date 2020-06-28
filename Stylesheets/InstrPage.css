@@ -1,0 +1,226 @@
+#InstrWrapper {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#07246d;
+    transform:scale(0,0);
+    transition:all 1s;
+}
+
+.InstrDesc {
+    position:relative;
+    top:3%;
+    padding:1vw;
+    text-align: center;
+    font-size:2vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: coral;
+    background:transparent;
+}
+
+.InstrDiv {
+    position:absolute;
+    top:0;
+    width:33.33%;
+    height:100%;
+    background:transparent;
+    border:5px ridge antiquewhite;
+    border-radius:8px;
+}
+
+#QTEDiv {
+    left:0;
+}
+
+#BarDiv {
+    left:33.3%;
+    background:cornflowerblue;
+}
+
+#LevelDiv {
+    left:66.7%;
+}
+
+.QTEIndDiv {
+    position:absolute;
+    left:0;
+    width:100%;
+    height:30%;
+    background:transparent;
+    border-radius:8px;
+}
+
+#LetterDiv {
+    top:10%;
+}
+
+#TrackDiv {
+    top:40%;
+}
+
+#SliderDiv {
+    top:70%;
+}
+
+.QTEDesc {
+    position:relative;
+    top:25%;
+    padding:1vw;
+    font-size:1vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: navajowhite;
+    background:transparent;
+}
+
+.QTEIndDiv img {
+    position:relative;
+    top:25%;
+    float:left;
+    height:50%;
+    border:2px solid black;
+    border-radius: 8px;
+}
+
+#TrackDiv div {
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+    height:50%;
+    width:25%;
+    float:left;
+    border:2px solid black;
+    border-radius: 8px;
+}
+
+#TrackDiv video {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:170%;
+}
+
+.BarDesc {
+    padding:2vw;
+    font-size:1vw;
+    font-family: Arvo;
+    text-indent:1.5vw;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: navajowhite;
+    background:transparent;
+}
+
+#BarDiv img {
+    position:relative;
+    left:50%;
+    transform:translate(-50%);
+    width:95%;
+    margin:auto;
+    height:auto;
+    border:2px solid black;
+    border-radius: 8px;
+}
+
+#BarDiv div {
+    position:relative;
+    top:0;
+    width:95%;
+    height:7%;
+    margin:auto;
+    border:2px solid black;
+    border-radius: 8px;
+}
+
+#BarDiv video {
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:100%;
+    height:auto;
+}
+
+#LevelsDiv {
+    background: transparent;
+    position:relative;
+    top:5%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width:90%;
+    height:36%;
+    margin:auto;
+}
+
+#LevelsDiv img{
+    width:50%;
+    height:50%;
+    border:2px solid grey;
+    border-radius:8px;
+}
+
+.LevelsDesc {
+    position:relative;
+    top:5%;
+    padding:2vw;
+    font-size:1vw;
+    font-family: Arvo;
+    text-indent:1.5vw;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: navajowhite;
+    background:transparent;
+}
+
+#SpecialLevel {
+    position:relative;
+    top:5%;
+    left:50%;
+    transform:translateX(-50%);
+    width:45%;
+    border:2px solid grey;
+    border-radius:8px;
+}
+
+#SpecialLevel img {
+    width:100%;
+}
+
+#InstrBackButton {
+    position:absolute;
+    top:4px;
+    left:4px;
+    background:indianred;
+    border:2px solid black;
+    border-radius:8px;
+}
+
+#InstrBackButton:hover {
+    cursor:pointer;
+    background:palevioletred;
+}
+
+.material-icons.InstrBack {
+    background:transparent;
+    color:white;
+    font-size:2vw;
+    text-shadow: 0px 1px 1px black,
+    1px 0px 1px black,
+    1px 1px 1px black,
+    0px 0px 1px black;
+}

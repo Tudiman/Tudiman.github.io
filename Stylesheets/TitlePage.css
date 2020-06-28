@@ -1,0 +1,102 @@
+#FirstPage {
+    tab-index: 1;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url("../Resources/PageTitle.jpg") center;
+    opacity:0;
+    transition: all 1s;
+}
+
+#LoadTitle {
+    position:absolute;
+    top:50%;
+    left:10%;
+    transform: translate(0,-50%);
+    width:100%;
+    background:transparent;
+    font-family:GojiraBlack;
+    font-size:7vw;
+    color:white;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    transition: all 1s;
+}
+
+#pressAnyButton {
+    opacity:0;
+    position:absolute;
+    top:90%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background:transparent;
+    font-size:2vw;
+    font-family:"Times New Roman";
+    color:white;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    transition: all 1s;
+}
+
+#gamerCont {
+    overflow:visible;
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    height:0;
+    width:0;
+    transform:translate(-50%,-50%);
+    background:transparent;
+    transition: all 0.8s;
+}
+
+#gamerLabel {
+    background:transparent;
+    font-size:2.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+}
+
+#gamerTag {
+    background:navajowhite;
+    border:5px ridge grey;
+    border-radius:8px;
+    font-size:2.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.2s;
+}
+
+#tagInfo {
+    position:absolute;
+    top:90%;
+    left:40%;
+    width:20vw;
+    padding:1vw;
+    font-size:1vw;
+    line-height: 2vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    background:rgba(255,0,0,0.4);
+    border:2px solid red;
+    border-radius: 8px;
+}

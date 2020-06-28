@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+    background: black;
+}
+#svg {
+    border:5px groove antiquewhite;
+    background-size: cover;
+    position:absolute;
+    top:10%;
+    left:10vw;
+}

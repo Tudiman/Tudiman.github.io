@@ -1,0 +1,49 @@
+* {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+
+.TitleReturnButton {
+    position:absolute;
+    top:0;
+    left:0;
+    background:rgba(0, 22, 114, 0.4);
+    padding:1vw 1vw 1vw 2vw;
+    border:2px solid black;
+    border-radius:8px;
+    font-size:1.5vw;
+    font-family: Arvo;
+    text-shadow: 2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black,
+    2px 2px 4px black;
+    color: white;
+    transition:all 0.5s;
+}
+
+.TitleReturnButton:hover {
+    background:rgba(0, 22, 114, 1);
+    border-color: white;
+    cursor:pointer;
+}
+
+.material-icons.returnIcon {
+    background:transparent;
+    position:absolute;
+    top:1vw;
+    left:0;
+    font-size:2vw;
+    /*padding-top:1vw;*/
+    /*border:2px solid red;*/
+}
+
+@font-face {
+    font-family: GojiraBlack;
+    src: url('../Local Fonts/GojiraBlack.ttf');
+}
