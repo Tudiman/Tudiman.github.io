@@ -1,7 +1,7 @@
 GiveItAll.LeaderboardPageScriptLoader = function(player) {
 
-    let sfxAudioFiles = [new Audio("../Resources/Audio/ArenaArrow.wav")];
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuClick.wav"));
+    let sfxAudioFiles = [new Audio("Resources/Audio/ArenaArrow.wav")];
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuClick.wav"));
 
     GiveItAll.MediaLoader(sfxAudioFiles, LeaderboardPageScript, player);
 
@@ -401,7 +401,7 @@ GiveItAll.LeaderboardPageScriptLoader = function(player) {
 
                         $(".LBSearchResultsRow").each(function (i, e) {
                             $(e).css({
-                                background: `url("../Resources/Back${i + 1}.jpg") bottom/cover`,
+                                background: `url("Resources/Back${i + 1}.jpg") bottom/cover`,
                             });
                             for (let j = 0; j < 3; j++)
                                 $(`<div class='LBSearchResultsCol' data-level=${j}>${matches[i][j]}</div>`)

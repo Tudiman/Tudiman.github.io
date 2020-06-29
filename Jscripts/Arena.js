@@ -1,13 +1,13 @@
 GiveItAll.ArenaScriptLoader = function(player) {
 
     let sfxAudioFiles = [];
-    sfxAudioFiles.push(new Audio("../Resources/Audio/ArenaArrow.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/ArenaEnter.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/ArenaMenu.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuConfirm.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/Wrong.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuClick.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/ArenaSong.mp3"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/ArenaArrow.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/ArenaEnter.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/ArenaMenu.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuConfirm.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/Wrong.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuClick.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/ArenaSong.mp3"));
 
     GiveItAll.MediaLoader(sfxAudioFiles, ArenaScript, player);
 

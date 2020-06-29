@@ -1,13 +1,13 @@
 GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
     let sfxAudioFiles = [];
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MultBarDown.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MultBarUp.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MultBarLevelUp.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/CountDown.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/CountDownGo.mp3"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/CountDownGo2.mp3"));
-    sfxAudioFiles.push(new Audio(`../Resources/Audio/Song${difficulty}.mp3`));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MultBarDown.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MultBarUp.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MultBarLevelUp.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/CountDown.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/CountDownGo.mp3"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/CountDownGo2.mp3"));
+    sfxAudioFiles.push(new Audio(`Resources/Audio/Song${difficulty}.mp3`));
 
     GiveItAll.MediaLoader(sfxAudioFiles, QTEScript, player, targetScore, timer, difficulty);
 
@@ -21,6 +21,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
         let score = 0;
         let __timeout, __scoreModif, __rhythm;
         let timeoutO, scoreModifO, rhythmO;
+        let startTime;
 
         let multBarProg = ["lightseagreen", "yellow", "orange", "red", "purple", "blue", "darkblue", "black"];
 
@@ -61,13 +62,16 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             $(scoreBar).css("height", "100%");
         }
 
-        function drawTable() {
+        function drawTable(preventQTE) {
 
             let ratio = __scoreModif / scoreModifO;
 
+            if(!preventQTE)
+                recursiveGeneration(performance.now() - startTime, timer);
+
             if (ratio === 1)
                 GiveItAll.playSound(sfxAudioFiles[0].src,"sfx", 0.5);
-            else if (Math.floor(ratio / 1.05) < Math.floor(ratio) && Math.floor(ratio / 1.05 > 1))
+            else if (Math.floor(ratio / 1.05) < Math.floor(ratio) && Math.floor(ratio / 1.05) > 1)
                 GiveItAll.playSound(sfxAudioFiles[2].src,"sfx", 0.5);
             else
                 GiveItAll.playSound(sfxAudioFiles[1].src,"sfx", 0.5);
@@ -217,7 +221,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                     __timeout *= 0.98;
                     __scoreModif *= 1.02;
 
-                    drawTable();
+                    drawTable(order !== stackSize);
 
                     $qte.remove();
                     $qteT.remove();
@@ -530,8 +534,8 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             timeout = 1500,
             scoreModif = 1,
             charset = "QWEASDZXC",
-            stackSize = "5"
-        } = {}) {
+            stackSize = 5
+        }) {
 
             if (argument.match(/k(ey)?/i)) {
                 QTEK(charset, timeout, scoreModif);
@@ -603,17 +607,14 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
         }
 
         function recursiveGeneration(startTime, duration) {
-
             if (startTime >= duration)
                 return;
-
             let choices = ["h", "hv", "k"];
             let choice = choices[Math.floor(Math.random() * 3)];
 
             setTimeout(function () {
                 quicktimeEvent(choice, {__timeout, __scoreModif});
 
-                recursiveGeneration(startTime + __rhythm, duration);
             }, __rhythm);
 
 
@@ -647,7 +648,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                 rhythmO = 600;
             }
 
-            let startTime = performance.now();
+            startTime = performance.now();
 
             __timeout = timeoutO;
             __scoreModif = scoreModifO;
@@ -660,7 +661,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
         function prepareGame(difficulty) {
 
             $mainFrame.css({
-                "background-image": `url("../Resources/TranspBack${difficulty}.jpg")`,
+                "background-image": `url("Resources/TranspBack${difficulty}.jpg")`,
                 "background-position": "center",
             });
 
@@ -737,6 +738,6 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
             sfxAudioFiles = undefined;
 
-        }, timer + 8000);
+        }, timer + 7000);
     }
 }

@@ -1,8 +1,8 @@
 GiveItAll.OptionsPageScriptLoader = function(...songs) {
 
     let sfxAudioFiles = [];
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuClick.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuConfirm.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuClick.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuConfirm.wav"));
 
     GiveItAll.MediaLoader(sfxAudioFiles, OptionsPageScript, songs);
 

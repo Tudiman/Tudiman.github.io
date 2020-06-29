@@ -1,10 +1,10 @@
 GiveItAll.TitlePageScriptLoader = function() {
 
     let sfxAudioFiles = [];
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuConfirm.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/Wrong.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuClick.wav"));
-    sfxAudioFiles.push(new Audio("../Resources/Audio/MenuSong.mp3"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuConfirm.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/Wrong.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuClick.wav"));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuSong.mp3"));
 
     let MenuSong;
 
