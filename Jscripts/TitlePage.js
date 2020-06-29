@@ -12,8 +12,7 @@ GiveItAll.TitlePageScriptLoader = function() {
 
     function TitlePageScript() {
 
-        let titleChars = ["G", "i", "v", "e", " i", "t", " a", "l", "l", " :",
-            " B", "r", "e", "a", "k", "d", "a", "n", "c", "e", " H", "e", "r", "o"];
+        let titleChars = "Precision:Extreme".split("");
 
         let tagNameInfo;
 
@@ -46,7 +45,7 @@ GiveItAll.TitlePageScriptLoader = function() {
 
             }, 2500 + i * 30);
         }
-        for (let i = 10; i < 24; i++) {
+        for (let i = 10; i < 17; i++) {
             setTimeout(function () {
 
                 text += titleChars[i];
