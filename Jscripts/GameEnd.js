@@ -1,4 +1,6 @@
-GiveItAll.GameEndScriptLoader = function(player, score, target, duration, difficulty) {
+GiveItAll.GameEndScriptLoader = function(player, score, target, duration, difficulty, song) {
+
+    song.play();
 
     let results = localStorage.getItem(`${player}|${duration}|${difficulty}`);
 
@@ -112,6 +114,7 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
             .click(function () {
                 new Audio("../Resources/Audio/MenuConfirm.wav").play();
                 setTimeout(GiveItAll.QTEScriptLoader, 1000, player, matches[i][1], duration, difficulty);
+                song.pause();
                 $(endPage).remove();
             })
             .appendTo($(lTarget));
@@ -123,6 +126,7 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
 
         setTimeout(GiveItAll.QTEScriptLoader, 1000, player, target, duration, difficulty);
 
+        song.pause();
         $(endPage).remove();
 
     })
@@ -187,6 +191,7 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
                 setTimeout(GiveItAll.QTEScriptLoader, 1000, player, parseFloat(targetInput.value), duration, difficulty);
             else
                 setTimeout(GiveItAll.QTEScriptLoader, 1000, player, 0, duration, difficulty);
+            song.pause();
             $(endPage).remove();
 
         }
@@ -220,6 +225,7 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
 
         setTimeout(GiveItAll.ArenaScriptLoader, 1000, player);
 
+        song.pause();
         $(endPage).remove();
 
     })
@@ -236,6 +242,7 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
 
         setTimeout(GiveItAll.TitlePageScriptLoader, 1000);
 
+        song.pause();
         $(endPage).remove();
 
     })

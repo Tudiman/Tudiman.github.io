@@ -66,11 +66,11 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             let ratio = __scoreModif / scoreModifO;
 
             if (ratio === 1)
-                GiveItAll.playSound(sfxAudioFiles[0].src,"sfx");
+                GiveItAll.playSound(sfxAudioFiles[0].src,"sfx", 0.5);
             else if (Math.floor(ratio / 1.05) < Math.floor(ratio) && Math.floor(ratio / 1.05 > 1))
-                GiveItAll.playSound(sfxAudioFiles[2].src,"sfx");
+                GiveItAll.playSound(sfxAudioFiles[2].src,"sfx", 0.5);
             else
-                GiveItAll.playSound(sfxAudioFiles[1].src,"sfx");
+                GiveItAll.playSound(sfxAudioFiles[1].src,"sfx", 0.5);
 
             $(multBase).css("background", multBarProg[Math.floor(ratio - 1)]);
 
@@ -548,7 +548,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
             setTimeout(function () {
 
-                GiveItAll.playSound(sfxAudioFiles[3].src,"sfx");
+                GiveItAll.playSound(sfxAudioFiles[3].src,"sfx", 0.5);
 
                 let $seq = $mainFrame.append(document.createElementNS("http://www.w3.org/2000/svg", "text"))
                     .children(":last")
@@ -566,7 +566,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                     $seq.text("2");
 
-                    GiveItAll.playSound(sfxAudioFiles[3].src,"sfx");
+                    GiveItAll.playSound(sfxAudioFiles[3].src,"sfx", 0.5);
 
                 }, 1000);
 
@@ -577,7 +577,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                     })
                         .text("1");
 
-                    GiveItAll.playSound(sfxAudioFiles[3].src,"sfx");
+                    GiveItAll.playSound(sfxAudioFiles[3].src,"sfx", 0.5);
 
                 }, 2000);
 
@@ -588,7 +588,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                     })
                         .text("GO!");
 
-                    GiveItAll.playSound(sfxAudioFiles[5].src,"sfx");
+                    GiveItAll.playSound(sfxAudioFiles[5].src,"sfx", 0.5);
 
                 }, 3000);
 
@@ -703,7 +703,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                     finalCountdown = setInterval(function () {
 
-                        GiveItAll.playSound(sfxAudioFiles[3].src,"sfx");
+                        GiveItAll.playSound(sfxAudioFiles[3].src,"sfx", 0.5);
 
                     }, 1000);
 
@@ -718,7 +718,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                 setTimeout(function () {
 
-                    GiveItAll.playSound(sfxAudioFiles[4].src,"sfx");
+                    GiveItAll.playSound(sfxAudioFiles[4].src,"sfx", 0.5);
 
                     clearInterval(timerInterval);
                 }, timer);
@@ -730,10 +730,10 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
         prepareGame(difficulty);
         setTimeout(function () {
 
-            //QTESong.pause();
+            QTESong.pause();
 
             $(document.body).children(":not('script')").remove();
-            GiveItAll.GameEndScriptLoader(player, score, targetScore, timer, difficulty);
+            GiveItAll.GameEndScriptLoader(player, score, targetScore, timer, difficulty, QTESong);
 
             sfxAudioFiles = undefined;
 

@@ -22,20 +22,31 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script>
-    window.jQuery || document.write('<script src="D:\\WebStorm 2017.1.4\\jquery\\dist\\jquery.min.js"><\/script>');
+    //window.jQuery || document.write('<script src="D:\\WebStorm 2017.1.4\\jquery\\dist\\jquery.min.js"><\/script>');
     let GiveItAll = {};
 </script>
 <script src="../Jscripts/UtilityPage.js"></script>
 <script src="../Jscripts/OptionsPage.js"></script>
 <script src="../Jscripts/InstrPage.js"></script>
 <script src="../Jscripts/LeaderboardPage.js"></script>
-<!--<script src="../Jscripts/Dancer.js"></script>-->
 <script src="../Jscripts/GameEnd.js"></script>
 <script src="../Jscripts/QTE.js"></script>
 <script src="../Jscripts/Arena.js"></script>
 <script src="../Jscripts/TitlePage.js"></script>
 <script>
-    GiveItAll.TitlePageScriptLoader();
+    //GiveItAll.TitlePageScriptLoader();
+    function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+            }
+        };
+        xhttp.open("POST", "../Resources/leaderboard.json", true);
+        xhttp.send();
+    }
+    loadDoc();
+    //GiveItAll.QTEScriptLoader("vlad", 0, 5000, 2);
 </script>
 </body>
 </html>

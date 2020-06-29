@@ -29,7 +29,7 @@ GiveItAll.playSound = function(src, type, volume) {
     let audio = document.createElement("audio");
     audio.src = src;
     audio.type = type;
-    audio.volume = volume || localStorage.getItem("overallVolume") * localStorage.getItem(`${type}Volume`);
+    audio.volume = localStorage.getItem("overallVolume") * localStorage.getItem(`${type}Volume`) * (volume || 1);
     const playPromise = audio.play();
     if (playPromise !== null){
         playPromise.catch(() => {
@@ -44,4 +44,11 @@ GiveItAll.playSound = function(src, type, volume) {
 
     return audio;
 
+};
+
+GiveItAll.stringifyMap = function(map) {
+    return JSON.stringify(Array.from(map.entries()));
+};
+GiveItAll.parseMap = function(string) {
+    return new Map(JSON.parse(string));
 };

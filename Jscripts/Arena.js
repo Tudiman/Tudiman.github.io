@@ -160,9 +160,6 @@ GiveItAll.ArenaScriptLoader = function(player) {
             "<div class='OptionsButton' id='OBTarget'>Alege un target</div>" +
             "<div id='TargetCont'>" +
             "<input type='text' id='TargetInput'>" +
-            /*"<select id='LBSelect'>" +
-            "<option value='0'>Nimic</option>" +
-            "</select>" +*/
             "</div>" +
             "<div class='OptionsButton' id='OBDuration'>Alege durata</div>" +
             "<ul id='radioCont'>" +
@@ -174,37 +171,6 @@ GiveItAll.ArenaScriptLoader = function(player) {
             "<div class='OptionsButton' id='OBCancel'>Anuleaza</div>" +
             "</div>")
             .appendTo($(arenaScreen));
-
-        /*function loadLSOptions() {
-
-            let toRemove = $(LBSelect).children(":gt(0)");
-            if (toRemove.length)
-                toRemove.remove();
-
-            function compareFn(a, b) {
-
-                return Number(b[1]) - Number(a[1]);
-
-            }
-
-            let regex = new RegExp(`^(\\w+)\\|(${duration})\\|(${currentLevel})$`);
-            let matches = [], match;
-
-            for (let key in localStorage) {
-                if ((match = regex.exec(key)) !== null && Number(match[2]) === duration && Number(match[3]) === currentLevel) {
-                    matches.push([match, localStorage.getItem(match[0])]);
-                }
-            }
-
-            matches.sort(compareFn);
-
-            let length = matches.length > 5 ? 5 : matches.length;
-
-            for (let i = 0; i < length; i++) {
-                $(`<option value="${matches[i][1]}">${matches[i][1]}</option>`)
-                    .appendTo($(LBSelect));
-            }
-        }*/
 
         function readyButtonHandler() {
 
@@ -231,9 +197,6 @@ GiveItAll.ArenaScriptLoader = function(player) {
                 height: "20%",
                 width: '25vw'
             })
-
-            //loadLSOptions();
-
         }
 
         $(readyButton).click(readyButtonHandler);
@@ -286,24 +249,6 @@ GiveItAll.ArenaScriptLoader = function(player) {
 
         $(TargetInput).change(OBTargetVerify);
 
-        /*$(LBSelect).change(function () {
-
-            targetScore = $(LBSelect).prop("value");
-
-            $(TargetInput).prop("value", targetScore);
-
-            $(OBConfirm).trigger("displayCheck", [1]);
-
-            $(TargetCont).css({
-                width: 0
-            })
-            setTimeout(function () {
-                $(TargetCont).css({
-                    display: "none"
-                })
-            }, 500);
-        })*/
-
         $(OBDuration).click(function () {
 
             GiveItAll.playSound(sfxAudioFiles[2].src, "sfx");
@@ -327,8 +272,6 @@ GiveItAll.ArenaScriptLoader = function(player) {
             duration = parseInt($(this).children("input").prop("value"));
 
             $(OBConfirm).trigger("displayCheck", [1]);
-
-            //loadLSOptions();
 
             setTimeout(function () {
 

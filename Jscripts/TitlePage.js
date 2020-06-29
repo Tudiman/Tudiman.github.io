@@ -91,8 +91,6 @@ GiveItAll.TitlePageScriptLoader = function() {
 
             $(document.documentElement).focus();
 
-            //MenuSong = GiveItAll.playSound(sfxAudioFiles[3].src,"bgm", 0.35);
-
             $(pressAnyButton).css({
                 opacity: 1
             })
