@@ -39,7 +39,9 @@ GiveItAll.playSound = function(src, type, volume) {
 
     audio.onended = function(){
         if(audio !== undefined)
-            audio.remove();
+            if(audio.type === "sfx")
+                audio.remove();
+            else audio.play();
     }
 
     return audio;

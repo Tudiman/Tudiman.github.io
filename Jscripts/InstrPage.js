@@ -19,7 +19,7 @@ GiveItAll.InstrPageScriptLoader = function() {
             "<div class='InstrDiv' id='QTEDiv'>" +
             "<p class='InstrDesc'>Sunt trei tipuri de evenimente</p>" +
             "<div class='QTEIndDiv' id='LetterDiv'>" +
-            "<img src='Resources/Letter.png'><p class='QTEDesc'>-litera<br/><br/>-trebuie sa apesi pe tasta cu litera desenata in cerc</p>" +
+            "<img src='Resources/Letter.png'><p class='QTEDesc'>-litera<br/><br/>-trebuie sa apesi pe tasta desenata in cerc, doar QWE ASD ZXC</p>" +
             "</div>" +
             "<div class='QTEIndDiv' id='TrackDiv'>" +
             "<div><video src='Resources/TrackVideo.mp4' muted loop autoplay></video></div>" +

@@ -19,9 +19,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             .attr("id", "svg");
 
         let score = 0;
-        let __timeout, __scoreModif, __rhythm;
         let timeoutO, scoreModifO, rhythmO;
         let startTime;
+        let combo;
 
         let multBarProg = ["lightseagreen", "yellow", "orange", "red", "purple", "blue", "darkblue", "black"];
 
@@ -64,7 +64,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
         function drawTable(preventQTE) {
 
-            let ratio = __scoreModif / scoreModifO;
+            let ratio = combo;
 
             if(!preventQTE)
                 recursiveGeneration(performance.now() - startTime, timer);
@@ -104,7 +104,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
         }
 
-        function QTEK(charset, timeout) {
+        function QTEK(charset) {
 
             let input = charset.split("")[Math.floor(Math.random() * 9)];
 
@@ -117,15 +117,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                     stroke: "black",
                     "stroke-width": 0.5
                 });
-            // let start = performance.now();
-            // requestAnimationFrame(function animate(time){
-            //     let timeFragment = (time - start) / 500;
-            //     $qte.css({
-            //         transform:`scale(${1 + timeFragment},${1 + timeFragment})`
-            //     });
-            //     if(timeFragment < 1)
-            //         requestAnimationFrame(animate);
-            // });
+
             let $qteT = $mainFrame.append(document.createElementNS("http://www.w3.org/2000/svg", "text")).children(":last")
                 .attr({
                     x: $qte.attr("cx"),
@@ -143,14 +135,12 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             let remover = setTimeout(function () {
                 $qte.remove();
                 $qteT.remove();
-                __timeout = timeoutO;
-                __scoreModif = scoreModifO;
-                __rhythm = rhythmO;
+                combo = 1;
 
                 drawTable();
 
                 $(window).off("keypress", context.uniqueKeypressHandler);
-            }, timeout);
+            }, timeoutO / combo);
 
             let context = {};
             context.uniqueKeypressHandler = function (event) {
@@ -160,11 +150,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                 $qte.remove();
                 $qteT.remove();
 
-                score += Math.ceil(1000 * __scoreModif);
+                score += Math.ceil(1000 * scoreModifO * combo);
 
-                __rhythm *= 0.95;
-                __timeout *= 0.95;
-                __scoreModif *= 1.05;
+                combo = Math.min(5, combo * 1.15);
 
                 drawTable();
 
@@ -175,7 +163,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             $(window).keypress(context.uniqueKeypressHandler);
         }
 
-        function QTEHv(stackSize, timeout) {
+        function QTEHv(stackSize) {
 
             function plantHoverable(order, firstX, firstY, firstColor, jointLength) {
 
@@ -192,16 +180,14 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                 if (secondY > 95 || secondY < 5)
                     secondY = (secondY - firstY) * (-1) + firstY;
 
-                let quickTimeout = timeout / 2;
+                let quickTimeout = timeoutO / combo / 1.5;
                 if (order === 1)
-                    quickTimeout = timeout;
+                    quickTimeout = timeoutO / combo;
                 let remover = setTimeout(function () {
 
                     $qte.remove();
                     $qteT.remove();
-                    __timeout = timeoutO;
-                    __scoreModif = scoreModifO;
-                    __rhythm = rhythmO;
+                    combo = 1;
 
                     drawTable();
 
@@ -215,11 +201,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                 let context = {};
                 context.uniqueHoverHandler = function () {
 
-                    score += Math.ceil(400 * __scoreModif);
+                    score += Math.ceil(400 * scoreModifO * combo);
 
-                    __rhythm *= 0.98;
-                    __timeout *= 0.98;
-                    __scoreModif *= 1.02;
+                    combo = Math.min(5, combo * 1.03);
 
                     drawTable(order !== stackSize);
 
@@ -312,19 +296,17 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
         }
 
-        function QTEH(timeout) {
+        function QTEH() {
 
             let remover = setTimeout(function () {
                 $qte.remove();
                 $track.remove();
-                __timeout = timeoutO;
-                __scoreModif = scoreModifO;
-                __rhythm = rhythmO;
+                combo = 1;
 
                 drawTable();
 
                 $mainFrame.off("mousemove", context.uniqueSliderHandler);
-            }, timeout);
+            }, timeoutO / combo);
 
             let context = {};
             context.uniqueSliderHandler = function (e) {
@@ -348,11 +330,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                             cy: originalY + (finalX - originalX) * Math.tan(rotVal * Math.PI / 180)
                         });
 
-                        score += Math.ceil(1500 * __scoreModif);
+                        score += Math.ceil(1500 * scoreModifO * combo);
 
-                        __rhythm *= 0.95;
-                        __timeout *= 0.95;
-                        __scoreModif *= 1.05;
+                        combo = Math.min(5, combo * 1.15);
 
                         drawTable();
 
@@ -378,11 +358,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                             cy: originalY - (originalX - finalX) * Math.tan(rotVal * Math.PI / 180)
                         });
 
-                        score += Math.ceil(1500 * __scoreModif);
+                        score += Math.ceil(1500 * scoreModifO * combo);
 
-                        __rhythm *= 0.95;
-                        __timeout *= 0.95;
-                        __scoreModif *= 1.05;
+                        combo = Math.min(5, combo * 1.15);
 
                         drawTable();
 
@@ -409,11 +387,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                             cy: finalY
                         });
 
-                        score += Math.ceil(1500 * __scoreModif);
+                        score += Math.ceil(1500 * scoreModifO * combo);
 
-                        __rhythm *= 0.95;
-                        __timeout *= 0.95;
-                        __scoreModif *= 1.05;
+                        combo = Math.min(5, combo * 1.15);
 
                         drawTable();
 
@@ -440,11 +416,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                             cy: finalY
                         });
 
-                        score += Math.ceil(1500 * __scoreModif);
+                        score += Math.ceil(1500 * scoreModifO * combo);
 
-                        __rhythm *= 0.95;
-                        __timeout *= 0.95;
-                        __scoreModif *= 1.05;
+                        combo = Math.min(5, combo * 1.15);
 
                         drawTable();
 
@@ -531,20 +505,18 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
         }
 
         function quicktimeEvent(argument, {
-            timeout = 1500,
-            scoreModif = 1,
             charset = "QWEASDZXC",
             stackSize = 5
-        }) {
+        } = {}) {
 
             if (argument.match(/k(ey)?/i)) {
-                QTEK(charset, timeout, scoreModif);
+                QTEK(charset);
             }
             else if (argument.match(/(hover)|(hv)/i)) {
-                QTEHv(stackSize, timeout, scoreModif);
+                QTEHv(stackSize);
             }
             else if (argument.match(/h(old)?/i)) {
-                QTEH(timeout, scoreModif);
+                QTEH();
             }
         }
 
@@ -610,12 +582,12 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             if (startTime >= duration)
                 return;
             let choices = ["h", "hv", "k"];
-            let choice = choices[Math.floor(Math.random() * 3)];
+            let choice = choices[Math.floor(Math.random() * choices.length)];
 
             setTimeout(function () {
-                quicktimeEvent(choice, {__timeout, __scoreModif});
+                quicktimeEvent(choice);
 
-            }, __rhythm);
+            }, rhythmO / combo);
 
 
         }
@@ -650,11 +622,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
             startTime = performance.now();
 
-            __timeout = timeoutO;
-            __scoreModif = scoreModifO;
-            __rhythm = rhythmO;
+            combo = 1;
 
-            recursiveGeneration(performance.now() - startTime + __rhythm, duration);
+            recursiveGeneration(performance.now() - startTime, duration);
 
         }
 

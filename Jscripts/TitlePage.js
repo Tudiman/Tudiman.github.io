@@ -141,11 +141,8 @@ GiveItAll.TitlePageScriptLoader = function() {
 
                         GiveItAll.playSound(sfxAudioFiles[0].src,"sfx");
                         setTimeout(GiveItAll.ArenaScriptLoader, 1000, player);
-
                         MenuSong.pause();
-
                         sfxAudioFiles = undefined;
-
                         $(FirstPage).remove();
 
                     });
