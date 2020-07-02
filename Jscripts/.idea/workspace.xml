@@ -67,7 +67,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QTE.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="QTE.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/QTE.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
@@ -80,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+            <state relative-caret-position="729">
+              <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -152,10 +152,10 @@
         <option value="$PROJECT_DIR$/GameEnd.js" />
         <option value="$PROJECT_DIR$/TitlePage.js" />
         <option value="$PROJECT_DIR$/../Stylesheets/TitlePage.css" />
-        <option value="$PROJECT_DIR$/../index.html" />
         <option value="$PROJECT_DIR$/InstrPage.js" />
         <option value="$PROJECT_DIR$/UtilityPage.js" />
         <option value="$PROJECT_DIR$/QTE.js" />
+        <option value="$PROJECT_DIR$/../index.html" />
       </list>
     </option>
   </component>
@@ -308,12 +308,12 @@
       <workItem from="1593468910266" duration="3087000" />
       <workItem from="1593512750028" duration="30000" />
       <workItem from="1593539023147" duration="9472000" />
-      <workItem from="1593718280247" duration="2045000" />
+      <workItem from="1593718280247" duration="2051000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26215000" />
+    <option name="totallyTimeSpent" value="26221000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="0" />
@@ -717,14 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/QTE.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -733,6 +725,14 @@
             <marker date="1593719728006" expanded="true" signature="1270:1412" ph="..." />
             <marker date="1593719728006" expanded="true" signature="1456:1551" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="729">
+          <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
