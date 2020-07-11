@@ -10,7 +10,20 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
 
     function GameEndScript(player, score, target, duration, difficulty, song) {
 
-        song.play();
+        let songVolumeInterval, originalVolume;
+
+        if(song) {
+            originalVolume = song.volume;
+            song.volume = 0;
+            songVolumeInterval = setInterval(function () {
+                console.log(song.volume);
+                if (song.volume < originalVolume) {
+                    song.volume += 0.01;
+                }
+                else clearInterval(songVolumeInterval);
+            }, 5);
+            song.play();
+        }
 
         let results = localStorage.getItem(`${player}|${duration}|${difficulty}`);
 
@@ -124,7 +137,11 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
                 .click(function () {
                     GiveItAll.playSound(sfxAudioFiles[0].src,"sfx");
                     setTimeout(GiveItAll.QTEScriptLoader, 1000, player, matches[i][1], duration, difficulty);
-                    song.pause();
+                    if(song) {
+                        song.volume = originalVolume;
+                        clearInterval(songVolumeInterval);
+                        song.pause();
+                    }
                     $(endPage).remove();
                 })
                 .appendTo($(lTarget));
@@ -136,7 +153,11 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
 
             setTimeout(GiveItAll.QTEScriptLoader, 1000, player, target, duration, difficulty);
 
-            song.pause();
+            if(song) {
+                song.volume = originalVolume;
+                clearInterval(songVolumeInterval);
+                song.pause();
+            }
             $(endPage).remove();
 
         })
@@ -200,7 +221,11 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
                     setTimeout(GiveItAll.QTEScriptLoader, 1000, player, parseFloat(targetInput.value), duration, difficulty);
                 else
                     setTimeout(GiveItAll.QTEScriptLoader, 1000, player, 0, duration, difficulty);
-                song.pause();
+                if(song) {
+                    song.volume = originalVolume;
+                    clearInterval(songVolumeInterval);
+                    song.pause();
+                }
                 $(endPage).remove();
 
             }
@@ -234,7 +259,11 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
 
             setTimeout(GiveItAll.ArenaScriptLoader, 1000, player);
 
-            song.pause();
+            if(song) {
+                song.volume = originalVolume;
+                clearInterval(songVolumeInterval);
+                song.pause();
+            }
             $(endPage).remove();
 
         })
@@ -251,7 +280,11 @@ GiveItAll.GameEndScriptLoader = function(player, score, target, duration, diffic
 
             setTimeout(GiveItAll.TitlePageScriptLoader, 1000);
 
-            song.pause();
+            if(song) {
+                song.volume = originalVolume;
+                clearInterval(songVolumeInterval);
+                song.pause();
+            }
             $(endPage).remove();
 
         })

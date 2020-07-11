@@ -59,12 +59,88 @@ GiveItAll.ArenaScriptLoader = function(player) {
                 "Nu recomand acest nivel. Incearca-l o data si du-te inapoi la nivelul 4 sa te simti din nou bun.</p>" +
                 "</div>");
 
+        $("<div id='optionsMenu'>" +
+            "<div class='OptionsButton' id='OBTarget'>Alege un target</div>" +
+            "<div id='TargetCont'>" +
+            "<input type='text' id='TargetInput'>" +
+            "</div>" +
+            "<div class='OptionsButton' id='OBDuration'>Alege durata</div>" +
+            "<ul id='radioCont'>" +
+            "<li><input type='radio' name='durationRadio' value='30000'><label for='30000'>30s</label></li>" +
+            "<li><input type='radio' name='durationRadio' value='60000'><label for='60000'>60s</label></li>" +
+            "<li><input type='radio' name='durationRadio' value='120000'><label for='120000'>120s</label></li>" +
+            "</ul>" +
+            "<div class='OptionsButton' id='OBConfirm'>Start</div>" +
+            "<div class='OptionsButton' id='OBCancel'>Anuleaza</div>" +
+            "</div>")
+            .appendTo($(arenaScreen));
+
         let $svg = $(document.createElementNS("http://www.w3.org/2000/svg", "svg"))
             .attr({
                 id: "arenaSvg",
                 viewBox: "0 0 100 100"
             })
             .appendTo($arenaScreen);
+
+        let $defs = $(document.createElementNS("http://www.w3.org/2000/svg", "defs"))
+            .appendTo($svg);
+
+        let $leftGrad = $(document.createElementNS("http://www.w3.org/2000/svg", "linearGradient"))
+            .attr({
+                id: "leftGrad",
+                x1: "55%",
+                y1: "-15%",
+                x2: "100%",
+                y2: "100%"
+            })
+            .appendTo($defs);
+        let $lstop1 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                    offset: "25%",
+                style: "stop-color:rgb(255,0,0);stop-opacity:1"
+            })
+            .appendTo($leftGrad);
+        let $lstop2 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "50%",
+                style: "stop-color:rgb(235,235,235);stop-opacity:1"
+            })
+            .appendTo($leftGrad);
+        let $lstop3 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "75%",
+                style: "stop-color:rgb(255,0,0);stop-opacity:1"
+            })
+            .appendTo($leftGrad);
+
+        let $rightGrad = $(document.createElementNS("http://www.w3.org/2000/svg", "linearGradient"))
+            .attr({
+                id: "rightGrad",
+                x1: "55%",
+                y1: "-25%",
+                x2: "100%",
+                y2: "90%"
+            })
+            .appendTo($defs);
+        let $rstop1 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "25%",
+                style: "stop-color:rgb(255,0,0);stop-opacity:1"
+            })
+            .appendTo($rightGrad);
+        let $rstop2 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "50%",
+                style: "stop-color:rgb(235,235,235);stop-opacity:1"
+            })
+            .appendTo($rightGrad);
+        let $rstop3 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "75%",
+                style: "stop-color:rgb(255,0,0);stop-opacity:1"
+            })
+            .appendTo($rightGrad);
+
 
         let $lArrow = $(document.createElementNS("http://www.w3.org/2000/svg", "path"))
             .attr({
@@ -78,7 +154,7 @@ GiveItAll.ArenaScriptLoader = function(player) {
         let $rArrow = $(document.createElementNS("http://www.w3.org/2000/svg", "path"))
             .attr({
                 d: "M525 50 l-30 -50 v100 l30 -50Z",
-                fill: "red",
+                fill: "url(#rightGrad)",
                 stroke: "black"
             })
             .click(rArrowHandler)
@@ -92,7 +168,7 @@ GiveItAll.ArenaScriptLoader = function(player) {
                 return false;
 
             if (currentLevel === 5) {
-                $rArrow.attr("fill", "red");
+                $rArrow.attr("fill", "url(#rightGrad)");
             }
 
             let current = document.getElementById(`level${currentLevel}screen`);
@@ -118,7 +194,7 @@ GiveItAll.ArenaScriptLoader = function(player) {
                 return false;
 
             if (currentLevel === 1)
-                $lArrow.attr("fill", "red");
+                $lArrow.attr("fill", "url(#leftGrad)");
 
             let current = document.getElementById(`level${currentLevel}screen`);
             let next = document.getElementById(`level${++currentLevel}screen`);
@@ -155,22 +231,6 @@ GiveItAll.ArenaScriptLoader = function(player) {
             $(window).keydown(keydownHandler);
 
         }, 500)
-
-        $("<div id='optionsMenu'>" +
-            "<div class='OptionsButton' id='OBTarget'>Alege un target</div>" +
-            "<div id='TargetCont'>" +
-            "<input type='text' id='TargetInput'>" +
-            "</div>" +
-            "<div class='OptionsButton' id='OBDuration'>Alege durata</div>" +
-            "<ul id='radioCont'>" +
-            "<li><input type='radio' name='durationRadio' value='30000'><label for='30000'>30s</label></li>" +
-            "<li><input type='radio' name='durationRadio' value='60000'><label for='60000'>60s</label></li>" +
-            "<li><input type='radio' name='durationRadio' value='120000'><label for='120000'>120s</label></li>" +
-            "</ul>" +
-            "<div class='OptionsButton' id='OBConfirm'>Start</div>" +
-            "<div class='OptionsButton' id='OBCancel'>Anuleaza</div>" +
-            "</div>")
-            .appendTo($(arenaScreen));
 
         function readyButtonHandler() {
 
@@ -264,10 +324,9 @@ GiveItAll.ArenaScriptLoader = function(player) {
 
             GiveItAll.playSound(sfxAudioFiles[2].src, "sfx");
 
-            $(radioCont).children().css("background", "#042459");
+            $(radioCont).children().css("background", "linear-gradient(90deg, #1CB5E0 0%, #000851 100%);");
 
             $(this).children("input").prop("checked", "checked");
-            $(this).css("background", "green");
 
             duration = parseInt($(this).children("input").prop("value"));
 

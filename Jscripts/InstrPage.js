@@ -32,16 +32,16 @@ GiveItAll.InstrPageScriptLoader = function() {
             "</div>" +
             "</div>" +
             "<div class='InstrDiv' id='BarDiv'>" +
-            "<p class='InstrDesc'>Cum functioneaza multiplierul</p>" +
-            "<p class='BarDesc'>Multiplierul afecteaza frecventa de aparitie a evenimentelor," +
+            "<p class='InstrDesc'>Cum functioneaza combo-ul</p>" +
+            "<p class='BarDesc'>Combo-ul afecteaza frecventa de aparitie a evenimentelor," +
             " durata dupa care dispar evenimentele si numarul de puncte primit la fiecare eveniment completat.</p>" +
             "<img src='Resources/MultBar.png'><p class='BarDesc'>Initial, multiplierul este 1.</p>" +
-            "<div><video src='Resources/MultBarUp.mp4' muted loop autoplay></video></div><p class='BarDesc'>Dupa un eveniment completat, multiplierul creste.<br/>Drept urmare, evenimentele apar mai des," +
+            "<div><video src='Resources/MultBarUp.mp4' muted loop autoplay></video></div><p class='BarDesc'>Dupa un eveniment completat, combo-ul creste.<br/>Drept urmare, evenimentele apar mai des," +
             " stau mai putin, si ofera mai multe puncte.</p>" +
             "<div><video src='Resources/MultBarDown.mp4' muted loop autoplay></video></div>" +
-            "<p class='BarDesc'>Daca ratezi un eveniment, multiplierul se intoarce la 1.</p>" +
-            "<p class='BarDesc'>Daca vrei scoruri mari, tine multiplierul cat mai sus," +
-            " dar nu uita ca un multiplier mai mare inseamna dificultate marita a jocului</p>" +
+            "<p class='BarDesc'>Daca ratezi un eveniment, combo-ul se intoarce la 1.</p>" +
+            "<p class='BarDesc'>Daca vrei scoruri mari, tine combo-ul cat mai sus," +
+            " dar nu uita ca un combo mai mare inseamna dificultate marita a jocului.</p>" +
             "</div>" +
             "<div class='InstrDiv' id='LevelDiv'>" +
             "<p class='InstrDesc'>Sunt cinci nivele</p>" +

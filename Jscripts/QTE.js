@@ -8,6 +8,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
     sfxAudioFiles.push(new Audio("Resources/Audio/CountDownGo.mp3"));
     sfxAudioFiles.push(new Audio("Resources/Audio/CountDownGo2.mp3"));
     sfxAudioFiles.push(new Audio(`Resources/Audio/Song${difficulty}.mp3`));
+    sfxAudioFiles.push(new Audio("Resources/Audio/MenuConfirm.wav"));
 
     GiveItAll.MediaLoader(sfxAudioFiles, QTEScript, player, targetScore, timer, difficulty);
 
@@ -18,26 +19,99 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
         let $mainFrame = $("<svg width='80vw' height='90%' viewBox='-40 0 180 100'></svg>").appendTo($("body"))
             .attr("id", "svg");
 
+        let $defs = $(document.createElementNS("http://www.w3.org/2000/svg", "defs"))
+            .appendTo($mainFrame);
+
+        let $grad = $(document.createElementNS("http://www.w3.org/2000/svg", "linearGradient"))
+            .attr({
+                id: "grad",
+                x1: "35%",
+                y1: "-20%",
+                x2: "100%",
+                y2: "100%"
+            })
+            .appendTo($defs);
+        let $stop1 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "0%",
+                style: "stop-color:rgb(0,0,0);stop-opacity:1"
+            })
+            .appendTo($grad);
+        let $stop2 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "50%",
+                style: "stop-color:rgb(0,0,0);stop-opacity:1"
+            })
+            .appendTo($grad);
+        let $stop3 = $(document.createElementNS("http://www.w3.org/2000/svg", "stop"))
+            .attr({
+                offset: "100%",
+                style: "stop-color:rgb(0,0,0);stop-opacity:1"
+            })
+            .appendTo($grad);
+
         let score = 0;
         let timeoutO, scoreModifO, rhythmO;
         let startTime;
         let combo;
+        let remover, hvremover = [], spawnTimeout, durationTimeout, countdownsTimeout = [], timerInterval;
 
         let multBarProg = ["lightseagreen", "yellow", "orange", "red", "purple", "blue", "darkblue", "black"];
+        let baseComboHue = {
+            r: 20,
+            g: 20,
+            b: 156
+        };
 
         $(document.body)
             .append(`<div id='scoreTable'><div id='scoreBar'></div>
     <p class="score" id="ownScore">Scor : 0</p><p class="score" id="targetScore">Obiectiv : ${targetScore}</p></div>`)
+            .append(`<div id='buttonsCont'><span class="material-icons" id="refresh">refresh </span>
+    <span class="material-icons" id="back">arrow_back_ios </span></div>`)
             .append(`<div id='multTable'><div id='multBase'></div><div id='multBar'></div>
     <p id='multBonus'>Bonus : X1.00</p></div>`)
             .append(`<div id="timeTable"><p id="time">Timp ramas : ${timer / 1000}</p></div>`)
             .append("<ul id='QTELB'><li id='LBHeader'>Leader Board</li></ul>");
 
         function compareFn(a, b) {
-
             return Number(b[1]) - Number(a[1]);
+        }
+
+        function clearScreen() {
+
+            QTESong.pause();
+            $(window).off("keypress");
+            $(window).off("mouseenter");
+            $(window).off("mousemove");
+            $(window).off("mousedown");
+            $(document.body).children(":not('script')").remove();
+            GiveItAll.playSound(sfxAudioFiles[7].src,"sfx");
+            sfxAudioFiles = undefined;
 
         }
+
+        function clearTimeouts() {
+            clearTimeout(remover);
+            for(let timeout of hvremover)
+                clearTimeout(timeout);
+            clearTimeout(spawnTimeout);
+            clearTimeout(durationTimeout);
+            for(let timeout of countdownsTimeout)
+                clearTimeout(timeout);
+            clearTimeout(timerInterval);
+        }
+
+        $(refresh).click(function(){
+            clearTimeouts();
+            clearScreen();
+            setTimeout(GiveItAll.QTEScriptLoader, 1000, player, targetScore, timer, difficulty);
+        });
+
+        $(back).click(function(){
+            clearTimeouts();
+            clearScreen();
+            setTimeout(GiveItAll.ArenaScriptLoader, 1000, player);
+        });
 
         let regex = new RegExp(`^(\\w+)\\|(${timer})\\|(${difficulty})$`);
         let matches = [], match;
@@ -62,7 +136,21 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             $(scoreBar).css("height", "100%");
         }
 
-        function drawTable(preventQTE) {
+        function generateColor(base, step) {
+            let steps = {
+                r: (255 - base.r) / 4,
+                g: (255 - base.g) / 4,
+                b: (255 - base.b) / 4,
+            };
+            return {
+                left: `rgb(${base.r + steps.r * step}, ${base.g}, ${base.b + steps.b * step})`,
+                middle: `rgb(${base.r * 2 + 10 * step}, ${base.g * 2 + 10 * step}, 255)`,
+                right: `rgb(${base.r}, ${base.g + steps.g * step}, ${base.b + steps.b * step})`
+
+            }
+        }
+
+        function drawTable(modifier, preventQTE) {
 
             let ratio = combo;
 
@@ -71,19 +159,68 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
             if (ratio === 1)
                 GiveItAll.playSound(sfxAudioFiles[0].src,"sfx", 0.35);
-            else if (Math.floor(ratio / 1.05) < Math.floor(ratio) && Math.floor(ratio / 1.05) > 1)
+            else if (Math.floor(ratio / modifier) < Math.floor(ratio))
                 GiveItAll.playSound(sfxAudioFiles[2].src,"sfx", 0.35);
             else
                 GiveItAll.playSound(sfxAudioFiles[1].src,"sfx", 0.35);
 
-            $(multBase).css("background", multBarProg[Math.floor(ratio - 1)]);
+            let baseStep = Math.floor(ratio - 1);
+            let barStep = Math.floor(ratio);
+            let baseColor = generateColor(baseComboHue, baseStep);
+            let barColor = generateColor(baseComboHue, barStep);
 
-            $(multBar).css({
-                background: multBarProg[Math.floor(ratio)],
-                width: `${(ratio - Math.floor(ratio)) * 100}%`
-            });
 
-            $(multBonus).text("Bonus : X" + ratio.toFixed(2));
+            if ($(multBonus).text() !== "Bonus : X5.00" && Math.floor(ratio / modifier) < Math.floor(ratio)) {
+                $(multBar).css({
+                    background: `linear-gradient(155deg, ${baseColor.left} ${20 - 5 * baseStep}%,
+                ${baseColor.middle} 50%, ${baseColor.right} ${80 + 5 * baseStep}%)`,
+                    transition: "all 0.2s linear",
+                    width: `100%`
+                });
+
+                setTimeout(function () {
+                    $(multBase).css("background", `linear-gradient(155deg, ${baseColor.left} ${20 - 5 * baseStep}%,
+                    ${baseColor.middle} 50%, ${baseColor.right} ${80 + 5 * baseStep}%)`);
+                    $(multBar).css({
+                        transition: "all 0s",
+                        display: "none",
+                        width: `0%`
+                    });
+                }, 202);
+
+                setTimeout(function () {
+                    $(multBase).css("background", `linear-gradient(155deg, ${baseColor.left} ${20 - 5 * baseStep}%,
+                        ${baseColor.middle} 50%, ${baseColor.right} ${80 + 5 * baseStep}%)`);
+
+                    $(multBar).css({
+                        background: `linear-gradient(155deg, ${barColor.left} ${20 - 5 * barStep}%,
+                            ${barColor.middle} 50%, ${barColor.right} ${80 + 5 * barStep}%)`,
+                        transition: "all 0.2s",
+                        display: "block",
+                        width: `${(ratio - Math.floor(ratio)) * 100}%`
+                    });
+                    let brightness = "1." + Math.floor(125 * ratio);
+                    $(multTable).css("filter", `brightness(${brightness})`);
+
+                    $(multBonus).text("Bonus : X" + ratio.toFixed(2));
+                }, 210);
+            }
+            else {
+                $(multBase).css("background", `linear-gradient(155deg, ${baseColor.left} ${20 - 5 * baseStep}%,
+                    ${baseColor.middle} 50%, ${baseColor.right} ${80 + 5 * baseStep}%)`);
+
+                $(multBar).css({
+                    background: `linear-gradient(155deg, ${barColor.left} ${20 - 5 * barStep}%,
+                        ${barColor.middle} 50%, ${barColor.right} ${80 + 5 * barStep}%)`,
+                    transition: "all 0.2s",
+                    display: "block",
+                    width: `${(ratio - Math.floor(ratio)) * 100}%`
+                });
+                let brightness = "1." + Math.floor(125 * ratio);
+                $(multTable).css("filter", `brightness(${brightness})`);
+
+                $(multBonus).text("Bonus : X" + ratio.toFixed(2));
+            }
 
             $(ownScore).text("Scor : " + score);
 
@@ -108,12 +245,17 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
             let input = charset.split("")[Math.floor(Math.random() * 9)];
 
+            let color = `rgb(${Math.random() * 255},${Math.random() * 255},${100 + Math.random() * 155})`;
+            $($stop1).attr("style", `stop-color:${color};stop-opacity:1`);
+            $($stop2).attr("style", `stop-color:rgb(235,235,235);stop-opacity:1`);
+            $($stop3).attr("style", `stop-color:${color};stop-opacity:1`);
+
             let $qte = $mainFrame.append(document.createElementNS("http://www.w3.org/2000/svg", "circle")).children(":last")
                 .attr({
                     cx: Math.floor(Math.random() * 170) - 35,
                     cy: Math.floor(Math.random() * 90) + 5,
                     r: 4,
-                    fill: `rgb(${Math.random() * 255},${Math.random() * 255},${100 + Math.random() * 155})`,
+                    fill: "url(#grad)",
                     stroke: "black",
                     "stroke-width": 0.5
                 });
@@ -132,7 +274,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                 })
                 .text(input);
 
-            let remover = setTimeout(function () {
+            remover = setTimeout(function () {
                 $qte.remove();
                 $qteT.remove();
                 combo = 1;
@@ -140,7 +282,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                 drawTable();
 
                 $(window).off("keypress", context.uniqueKeypressHandler);
-            }, timeoutO / combo);
+            }, timeoutO / Math.sqrt(combo));
 
             let context = {};
             context.uniqueKeypressHandler = function (event) {
@@ -154,7 +296,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                 combo = Math.min(5, combo * 1.15);
 
-                drawTable();
+                drawTable(1.15);
 
                 $(window).off("keypress", context.uniqueKeypressHandler);
                 clearTimeout(remover);
@@ -165,7 +307,12 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
         function QTEHv(stackSize) {
 
-            function plantHoverable(order, firstX, firstY, firstColor, jointLength) {
+            let color = `rgb(${Math.random() * 255},${Math.random() * 255},${100 + Math.random() * 155})`;
+            $($stop1).attr("style", `stop-color:${color};stop-opacity:1`);
+            $($stop2).attr("style", `stop-color:rgb(235,235,235);stop-opacity:1`);
+            $($stop3).attr("style", `stop-color:${color};stop-opacity:1`);
+
+            function plantHoverable(order, firstX, firstY, jointLength) {
 
                 let secondX = Math.floor(Math.random() * 2 * jointLength) - jointLength;
 
@@ -183,7 +330,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                 let quickTimeout = timeoutO / combo / 1.5;
                 if (order === 1)
                     quickTimeout = timeoutO / combo;
-                let remover = setTimeout(function () {
+                hvremover[order - 1] = setTimeout(function () {
 
                     $qte.remove();
                     $qteT.remove();
@@ -205,7 +352,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                     combo = Math.min(5, combo * 1.03);
 
-                    drawTable(order !== stackSize);
+                    drawTable(1.03, order !== stackSize);
 
                     $qte.remove();
                     $qteT.remove();
@@ -213,10 +360,9 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                         $qte2.remove();
                         $qteT2.remove();
                         $joint.remove();
-                        plantHoverable(order + 1, parseInt($qte2.attr("cx")), parseInt($qte2.attr("cy")),
-                            $qte2.attr("fill"), jointLength);
+                        plantHoverable(order + 1, parseInt($qte2.attr("cx")), parseInt($qte2.attr("cy")), jointLength);
                     }
-                    clearTimeout(remover);
+                    clearTimeout(hvremover[order - 1]);
                 };
 
                 let $joint, $qte2, $qteT2;
@@ -240,7 +386,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                             cx: secondX,
                             cy: secondY,
                             r: 4,
-                            fill: `rgb(${Math.random() * 255},${Math.random() * 255},${100 + Math.random() * 155})`,
+                            fill: "url(#grad)",
                             stroke: "black",
                             "stroke-width": 0.5
                         });
@@ -266,7 +412,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                         cx: firstX,
                         cy: firstY,
                         r: 4,
-                        fill: firstColor,
+                        fill: "url(#grad)",
                         stroke: "black",
                         "stroke-width": 0.5
                     });
@@ -291,14 +437,13 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             }
 
             plantHoverable(1, Math.floor(Math.random() * 170) - 35, Math.floor(Math.random() * 90) + 5,
-                `rgb(${Math.random() * 255},${Math.random() * 255},${100 + Math.random() * 155})`
-                , Math.floor(Math.random() * 15) + 10);
+                Math.floor(Math.random() * 15) + 10);
 
         }
 
         function QTEH() {
 
-            let remover = setTimeout(function () {
+            remover = setTimeout(function () {
                 $qte.remove();
                 $track.remove();
                 combo = 1;
@@ -334,7 +479,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                         combo = Math.min(5, combo * 1.15);
 
-                        drawTable();
+                        drawTable(1.15);
 
                         $mainFrame.off("mousemove", context.uniqueSliderHandler);
                         $qte.off("mousedown");
@@ -362,7 +507,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                         combo = Math.min(5, combo * 1.15);
 
-                        drawTable();
+                        drawTable(1.15);
 
                         $mainFrame.off("mousemove", context.uniqueSliderHandler);
                         $qte.off("mousedown");
@@ -391,7 +536,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                         combo = Math.min(5, combo * 1.15);
 
-                        drawTable();
+                        drawTable(1.15);
 
                         $mainFrame.off("mousemove", context.uniqueSliderHandler);
                         $qte.off("mousedown");
@@ -420,7 +565,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                         combo = Math.min(5, combo * 1.15);
 
-                        drawTable();
+                        drawTable(1.15);
 
                         $mainFrame.off("mousemove", context.uniqueSliderHandler);
                         $qte.off("mousedown");
@@ -434,12 +579,17 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
             };
 
+            let color = `rgb(${Math.random() * 255},${Math.random() * 255},${100 + Math.random() * 155})`;
+            $($stop1).attr("style", `stop-color:${color};stop-opacity:1`);
+            $($stop2).attr("style", `stop-color:rgb(235,235,235);stop-opacity:1`);
+            $($stop3).attr("style", `stop-color:${color};stop-opacity:1`);
+
             let $qte = $mainFrame.append(document.createElementNS("http://www.w3.org/2000/svg", "circle")).children(":last")
                 .attr({
                     cx: Math.floor(Math.random() * 170) - 35,
                     cy: Math.floor(Math.random() * 90) + 5,
                     r: 4,
-                    fill: `rgb(${Math.random() * 255},${Math.random() * 255},${100 + Math.random() * 155})`,
+                    fill: "url(#grad)",
                     stroke: "black",
                     "stroke-width": 0.5
                 }).remove();
@@ -522,7 +672,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
         function showStartSequence() {
 
-            setTimeout(function () {
+            countdownsTimeout[0] = setTimeout(function () {
 
                 GiveItAll.playSound(sfxAudioFiles[3].src,"sfx", 0.35);
 
@@ -538,7 +688,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
                         "font-family": "Orbitron"
                     }).text("3");
 
-                setTimeout(function () {
+                countdownsTimeout[1] = setTimeout(function () {
 
                     $seq.text("2");
 
@@ -546,7 +696,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                 }, 1000);
 
-                setTimeout(function () {
+                countdownsTimeout[2] = setTimeout(function () {
 
                     $seq.attr({
                         x: 45
@@ -557,7 +707,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                 }, 2000);
 
-                setTimeout(function () {
+                countdownsTimeout[3] = setTimeout(function () {
 
                     $seq.attr({
                         x: 33
@@ -568,7 +718,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                 }, 3000);
 
-                setTimeout(function () {
+                countdownsTimeout[4] = setTimeout(function () {
 
                     $seq.remove();
 
@@ -584,10 +734,10 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
             let choices = ["h", "hv", "k"];
             let choice = choices[Math.floor(Math.random() * choices.length)];
 
-            setTimeout(function () {
+            spawnTimeout = setTimeout(function () {
                 quicktimeEvent(choice);
 
-            }, rhythmO / combo);
+            }, rhythmO / Math.sqrt(combo));
 
 
         }
@@ -654,14 +804,14 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
             showStartSequence();
 
-            setTimeout(function () {
+            countdownsTimeout[5] = setTimeout(function () {
                 generateQTE(timer, difficulty);
 
                 let countDown;
 
                 let gameStart = performance.now();
 
-                let timerInterval = setInterval(function () {
+                timerInterval = setInterval(function () {
 
                     countDown = timer - performance.now() + gameStart;
                     $(time).text("Timp ramas : " + Math.abs((countDown / 1000)).toFixed(2));
@@ -670,7 +820,7 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                 let finalCountdown;
 
-                setTimeout(function () {
+                countdownsTimeout[6] = setTimeout(function () {
 
                     finalCountdown = setInterval(function () {
 
@@ -680,14 +830,14 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
 
                 }, timer - 4000);
 
-                setTimeout(function () {
+                countdownsTimeout[7] = setTimeout(function () {
 
                     clearInterval(finalCountdown);
 
                 }, timer);
 
 
-                setTimeout(function () {
+                countdownsTimeout[8] = setTimeout(function () {
 
                     GiveItAll.playSound(sfxAudioFiles[4].src,"sfx", 0.35);
 
@@ -699,15 +849,11 @@ GiveItAll.QTEScriptLoader = function(player, targetScore, timer, difficulty) {
         }
 
         prepareGame(difficulty);
-        setTimeout(function () {
+        durationTimeout = setTimeout(function () {
 
-            QTESong.pause();
-
-            $(document.body).children(":not('script')").remove();
-            GiveItAll.GameEndScriptLoader(player, score, targetScore, timer, difficulty, QTESong);
-
-            sfxAudioFiles = undefined;
-
+            clearTimeouts();
+            clearScreen();
+            setTimeout(GiveItAll.GameEndScriptLoader, 1000, player, score, targetScore, timer, difficulty, QTESong);
         }, timer + 7000);
     }
 }

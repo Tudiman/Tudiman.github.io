@@ -4,7 +4,7 @@
     left:0;
     width:100%;
     height:100%;
-    background:#07246d;
+    background: linear-gradient(135deg, #1b3c87 0%, #040828 100%);
     transform:scale(0,0);
     transition:all 1s;
 }
@@ -40,7 +40,7 @@
 
 #BarDiv {
     left:33.3%;
-    background:cornflowerblue;
+    background: linear-gradient(0deg, #FC466B 0%, #3F5EFB 100%);
 }
 
 #LevelDiv {

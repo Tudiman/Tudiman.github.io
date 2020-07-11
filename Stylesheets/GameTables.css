@@ -1,11 +1,11 @@
 #scoreTable {
     position:absolute;
-    top:0;
+    top:10%;
     left:0;
-    height:100%;
+    height:90%;
     width:10vw;
     border:5px ridge antiquewhite;
-    background: #211699;
+    background: linear-gradient(135deg, #1b3c87 0%, #040828 100%);
     text-align: center;
 }
 
@@ -15,7 +15,7 @@
     left:0;
     height:0%;
     width:100%;
-    background:cornflowerblue;
+    background: linear-gradient(135deg, #FC466B 0%, #3F5EFB 100%);
     transition: height 0.2s;
 }
 
@@ -37,10 +37,48 @@
     top:40%;
     left:0;
 }
+
 #targetScore {
     top:50%;
     left:0;
 }
+
+#scoreTable {
+    position:absolute;
+    top:10%;
+    left:0;
+    height:90%;
+    width:10vw;
+    border:5px ridge antiquewhite;
+    background: linear-gradient(135deg, #1b3c87 0%, #040828 100%);
+    text-align: center;
+}
+
+#buttonsCont {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    position:absolute;
+    top:0%;
+    left:0;
+    height:10%;
+    width:10vw;
+    border:5px ridge antiquewhite;
+    background: linear-gradient(135deg, #1b3c87 0%, #040828 100%);
+}
+
+#buttonsCont .material-icons {
+    background:transparent;
+    color: white;
+    font-size: 50px;
+    opacity:0.25;
+}
+
+#buttonsCont .material-icons:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
 #multTable {
     position: absolute;
     top: 0;
@@ -59,7 +97,8 @@
     left:0;
     width:100%;
     height:100%;
-    background:lightseagreen;
+    background:linear-gradient(155deg, rgb(20,20,156) 20%,
+    rgb(40,40,255) 50%, rgb(20,20,156) 80%);
 }
 
 #multBar {
@@ -68,8 +107,9 @@
     left:0;
     width:0%;
     height:100%;
-    background:yellow;
-    transition: width 0.2s;
+    background:black;
+    border-right: 5px solid red;
+    transition: all 0.2s;
 }
 
 #multBonus {
@@ -86,7 +126,7 @@
     2px 2px 4px black,
     2px 2px 4px black;
     font-style:italic;
-    color: white;
+    color: lightgrey;
 }
 
 #timeTable {
@@ -95,7 +135,7 @@
     right:0;
     width:10vw;
     height:10%;
-    background:#22006d;
+    background: linear-gradient(135deg, #1b3c87 0%, #040828 100%);
     text-align: center;
     border:5px ridge antiquewhite;
 }
@@ -120,7 +160,7 @@
     position:absolute;
     left:90vw;
     top:10%;
-    background:#22006d;
+    background: linear-gradient(135deg, #1b3c87 0%, #040828 100%);
     height:90%;
     width:10vw;
 }
@@ -130,8 +170,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height:8vw;
-    background: #042459;
+    height:6vw;
+    background: linear-gradient(135deg, #1CB5E0 0%, #000851 100%);
+    -webkit-transition:all 0.5s;
+    -moz-transition:all 0.5s;
     transition:all 0.5s;
     font-size:1.5vw;
     font-family: Arvo;
@@ -145,5 +187,5 @@
 
 #QTELB #LBHeader {
     font-size:2.2vw;
-    background:#2673ef;
+    background: linear-gradient(135deg, #FC466B 0%, #3F5EFB 100%);
 }

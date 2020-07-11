@@ -5,7 +5,7 @@
     width:100%;
     height:100%;
     opacity:0;
-    background:#3003c4;
+    background-image:url("../Resources/ArenaBg.jpg");
     text-align:center;
     transition:all 0.5s;
 }
@@ -25,7 +25,8 @@
     left:10vw;
     width:80vw;
     height:40vw;
-    background:darkslateblue;
+    background:cornflowerblue;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
     border:2px solid black;
     border-radius:8px;
 }
@@ -160,7 +161,8 @@
     left:50%;
     transform:translate(-50%);
     width:25vw;
-    background:navajowhite;
+    /*background: linear-gradient(#fcff9e 0%, #c67700 100%);*/
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
     padding:4px;
     border:5px ridge grey;
     border-radius:8px;
@@ -196,7 +198,7 @@
     text-align: center;
     height:33.3%;
     width:25vw;
-    background:navajowhite;
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
     border:5px ridge grey;
     border-radius:8px;
     font-size:1.5vw;
@@ -220,7 +222,7 @@
 }
 
 .OptionsButton:hover, #readyButton:hover {
-    background: antiquewhite;
+    filter:brightness(1.1);
     border-color:lightgrey;
     cursor: pointer;
  }
@@ -267,7 +269,7 @@
 }
 
 #LBSelect option {
-    background:#042459;
+    background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
 }
 
 #radioCont {
@@ -284,7 +286,7 @@
 
 #radioCont li {
     height:3.5vw;
-    background:#042459;
+    background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
     border:2px ridge grey;
     border-radius:6px;
     font-size:2vw;

@@ -14,7 +14,7 @@
     justify-content: center;
     height:8vw;
     width:25vw;
-    background:navajowhite;
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
     padding:4px;
     border:5px ridge grey;
     border-radius:8px;
@@ -30,7 +30,7 @@
 }
 
 .MainMenuItem:hover {
-    background:antiquewhite;
+    filter:brightness(1.1);
     border-color:lightgrey;
     cursor:pointer;
 }
